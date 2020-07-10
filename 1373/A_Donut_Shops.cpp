@@ -13,10 +13,20 @@ int main() {
   cin.tie(0);
   // freopen("input.txt", "r", stdin);
 
-  int a, b;
-  cin >> a >> b;
-  for (int i; i < a; i++) {
-    cout << "yo!";
+  ll x, a, b, c;
+  cin >> x; 
+
+  for (int i = 0; i < x; i++) {
+    cin >> a >> b >> c;
+
+    if (a >= c) {
+      cout << "-1 " << b << endl;
+    } else if (a*b <= c) {
+      cout << "1 -1" << endl;
+    } else {
+      cout << "1 " << b << endl;
+    }
   }
+
   return 0;
 }
