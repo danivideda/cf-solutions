@@ -1,44 +1,72 @@
 #include <bits/stdc++.h>
 #define ll long long
-#define pb push_back
-#define mp make_pair
-#define fr first
-#define sc second
-#define vp(a, b) vector<pair<a, b> >
 
 using namespace std;
+
+map<int, int> mp;
+int getCount(int key) {
+  return mp[key];
+}
 
 int main() {
   ios::sync_with_stdio(0);
   cin.tie(0);
-  int t;
+  // int t;
+  // cin >> t;
+  // string s;
+
+  // while (t--) {
+  //   cin >> s;
+  //   bool ok;
+  //   int res = 0, cur;
+  //   ll init = 1;
+
+  //   while (init) {
+  //     cur = init - 1;
+  //     init++;
+  //     ok = true;
+
+  //     for (int i = 0; i < s.length(); i++ ) {
+  //       res++;
+  //       s[i] == '+' ? cur++ : cur--;
+  //       if (cur < 0) {
+  //         ok = false;
+  //         break;
+  //       }
+  //     }
+
+  //     if (ok) break;
+  //   }
+
+  //   cout << res << endl;
+  // }
+
+  ll int t, res;
+  string st;
   cin >> t;
-  string s;
+  while (t--) {
+    cin >> st;
+    mp.clear();
 
-  for (int j = 0; j < t; j++) {
-    cin >> s;
-    bool ok;
-    int res = 0, cur;
-    ll init = 1;
+    res = 0;
+    int mx = 0;
+    int count = 0;
+    
+    for (int i = 0; i < st.length(); i++) {
+      st[i] == '-' ? count-- : count++;
 
-    while (init) {
-      cur = init - 1;
-      init++;
-      ok = true;
+      if (count < 0 && mp.find(count) == mp.end()) mp[count] = i+1;
 
-      for (int i = 0; i < s.length(); i++ ) {
-        res++;
-        s[i] == '+' ? cur++ : cur--;
-        if (cur < 0) {
-          ok = false;
-          break;
-        }
-      }
-
-      if (ok) break;
+      mx = min(mx, count);
     }
 
-    cout << res << endl;
+    mx *= -1;
+
+    for (int i = 0; i < mx; i++) {
+      res += getCount(-(i+1));
+    }
+
+    cout << res+st.length() << endl;
   }
 
   return 0;
